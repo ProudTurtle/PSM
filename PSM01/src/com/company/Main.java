@@ -24,12 +24,14 @@ public class Main {
         if(Objects.equals(text, "1"))
             {
                out.println("Wynik sin(x) to: " + Liczenie.Sin(x, n));
+               out.println("Błąd sin(x) to: " + Liczenie.bladSin(n));
 
 
 
             }else
             {
                 out.println("Wynik cos(x) to: " + Liczenie.Cos(x, n));
+                out.println("Błąd cos(x) to: " + Liczenie.bladCos(n));
             }
 
 
@@ -69,7 +71,40 @@ class Liczenie {
         return sum;
     }
 
+    public static double bladSin(int n)
+    {
+        double sum;
+        int k = n +1;
 
+        if(k%2!=0){
+            return Blad(k);
+        }
+
+        return  bladSin(k);
+    }
+
+    public static double bladCos(int n)
+    {
+        double sum;
+        int k = n+1;
+
+        if(k%2==0){
+            return Blad(k);
+        }
+
+        return  bladSin(k);
+    }
+
+    private static double Blad(int k) {
+        double sum;
+        double poww = Math.pow(Math.PI, k);
+        double licznik = Math.pow(-1, k);
+        licznik = licznik * poww;
+        double mianownik = silnia(k);
+        sum = Math.abs(Math.PI *(licznik/mianownik));
+
+        return sum;
+    }
 
 
 }
